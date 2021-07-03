@@ -1,0 +1,39 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-myapp2-dev-102030-authRole",
+      "UnauthRoleArn": "arn:aws:iam::603085981884:role/amplify-myapp2-dev-102030-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::603085981884:role/amplify-myapp2-dev-102030-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-myapp2-dev-102030-deployment",
+      "UnauthRoleName": "amplify-myapp2-dev-102030-unauthRole",
+      "StackName": "amplify-myapp2-dev-102030",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:603085981884:stack/amplify-myapp2-dev-102030/0aa21990-d2f8-11eb-b7b1-064e8d2dcf33",
+      "AmplifyAppId": "d5k20thelnsg"
+    },
+    "categories": {
+      "function": {
+        "myapp2e8e2376b": {
+          "deploymentBucketName": "amplify-myapp2-dev-102030-deployment",
+          "s3Key": "amplify-builds/myapp2e8e2376b-33647967683661564f62-build.zip"
+        },
+        "cognito83e78b41PostConfirmation": {
+          "GROUP": "user",
+          "deploymentBucketName": "amplify-myapp2-dev-102030-deployment",
+          "s3Key": "amplify-builds/cognito83e78b41PostConfirmation-664a53484844774b5170-build.zip"
+        },
+        "myapp2f9dbd98b": {
+          "deploymentBucketName": "amplify-myapp2-dev-102030-deployment",
+          "s3Key": "amplify-builds/myapp2f9dbd98b-476a4a66647a6f2b6c33-build.zip"
+        },
+        "myapp25a92187f": {
+          "deploymentBucketName": "amplify-myapp2-dev-102030-deployment",
+          "s3Key": "amplify-builds/myapp25a92187f-59337565322b74613939-build.zip"
+        }
+      },
+      "auth": {
+        "myapp248a0c9a348a0c9a3": {}
+      }
+    }
+  }
+}

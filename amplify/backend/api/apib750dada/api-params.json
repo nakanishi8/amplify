@@ -1,0 +1,42 @@
+{
+  "paths": [
+    {
+      "name": "/items",
+      "lambdaFunction": "myapp25a92187f",
+      "privacy": {
+        "private": true,
+        "auth": [
+          "/POST",
+          "/GET",
+          "/PUT",
+          "/PATCH",
+          "/DELETE"
+        ]
+      },
+      "policyResourceName": "/items"
+    }
+  ],
+  "resourceName": "apib750dada",
+  "apiName": "apib750dada",
+  "functionArns": [
+    {
+      "lambdaFunction": "myapp25a92187f"
+    }
+  ],
+  "privacy": {
+    "auth": 1,
+    "unauth": 0,
+    "authRoleName": "amplify-myapp2-dev-102030-authRole",
+    "unAuthRoleName": "amplify-myapp2-dev-102030-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "myapp25a92187f",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
