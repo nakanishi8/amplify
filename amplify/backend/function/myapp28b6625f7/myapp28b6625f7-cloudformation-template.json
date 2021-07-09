@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "myapp2e8e2376b",
+            "myapp28b6625f7",
             {
               "Fn::Join": [
                 "",
                 [
-                  "myapp2e8e2376b",
+                  "myapp28b6625f7",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "myapp2LambdaRole04a8cd55",
+            "myapp2LambdaRole0e9ae8df",
             {
               "Fn::Join": [
                 "",
                 [
-                  "myapp2LambdaRole04a8cd55",
+                  "myapp2LambdaRole0e9ae8df",
                   "-",
                   {
                     "Ref": "env"

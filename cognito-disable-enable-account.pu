@@ -1,0 +1,31 @@
+@startuml Cognito-disable-enable-account
+
+title AWS Cognito\nアカウント無効化、有効化
+
+actor "アカウントの有効、無効が更新されたユーザー(Browser)"
+
+actor "管理ユーザー(Browser)"
+
+"管理ユーザー(Browser)" -> WebApp : ログイン
+
+WebApp -> "API Gateway" : アカウント無効化(有効化)
+
+"API Gateway" -> "Cognito Identity Pool" : アカウント無効化(有効化)権限のチェック
+
+"API Gateway" -> Lambda
+
+Lambda -> "Cognito user pool" : アカウント無効化(有効化)
+
+note right: ユーザーの有効がDisabled⇄Enabled
+
+Lambda -> RDS : レコード更新
+
+"アカウントの有効、無効が更新されたユーザー(Browser)" -> WebApp: ログイン
+
+WebApp -> "Cognito user pool" : アカウントの有効、無効のチェック
+
+"Cognito user pool" -> WebApp
+
+WebApp -> "アカウントの有効、無効が更新されたユーザー(Browser)" : 認証情報
+
+@enduml

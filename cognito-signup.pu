@@ -1,0 +1,41 @@
+@startuml Cognito-mfa-signup
+
+title AWS Cognito\nアカウント作成とMFA(多要素認証)有効時のログイン
+
+actor "作成されたユーザー(Browser)"
+
+actor "管理ユーザー(Browser)"
+
+"管理ユーザー(Browser)" -> WebApp : ログイン
+
+WebApp -> "API Gateway" : アカウント作成
+
+"API Gateway" -> "Cognito Identity Pool" : アカウント作成権限のチェック
+
+"API Gateway" -> Lambda
+
+Lambda -> "Cognito user pool" : アカウント作成、、グループに追加
+
+note right : ユーザーのステータスはFORCE_CHANGE_PASSWORD
+
+"Cognito user pool" -> SES
+
+SES -> "作成されたユーザー(Browser)" : 一時パスワードの送信
+
+note left: email
+
+Lambda -> RDS: レコード作成
+
+"作成されたユーザー(Browser)" -> WebApp : 一時パスワードでログイン
+
+WebApp -> "Cognito user pool" : 新しいパスワードとEメールを入力
+
+note right : ユーザーのステータスはCONFIRMED
+
+"Cognito user pool" -> WebApp
+
+WebApp -> "Cognito user pool" : モバイルでQRコードをスキャンしてトークンソフトウェアをインストールし\nセキュリティートークンを入力
+
+"Cognito user pool" -> "作成されたユーザー(Browser)": 認証情報(ログイン済)
+
+@enduml

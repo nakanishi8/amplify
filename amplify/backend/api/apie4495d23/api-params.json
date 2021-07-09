@@ -1,0 +1,99 @@
+{
+  "paths": [
+    {
+      "name": "/items",
+      "lambdaFunction": "myapp28b6625f7",
+      "privacy": {
+        "userPoolGroups": {
+          "admin": [
+            "/POST",
+            "/GET",
+            "/PUT",
+            "/PATCH",
+            "/DELETE"
+          ],
+          "user": [
+            "/POST",
+            "/GET",
+            "/PUT",
+            "/PATCH",
+            "/DELETE"
+          ]
+        }
+      },
+      "policyResourceName": "/items"
+    },
+    {
+      "name": "/books",
+      "lambdaFunction": "myapp28a03b28d",
+      "privacy": {
+        "userPoolGroups": {
+          "admin": [
+            "/POST",
+            "/GET",
+            "/PUT",
+            "/PATCH",
+            "/DELETE"
+          ]
+        }
+      },
+      "policyResourceName": "/books"
+    }
+  ],
+  "resourceName": "apie4495d23",
+  "apiName": "apie4495d23",
+  "authResourceName": "myapp23ab574dc3ab574dc",
+  "functionArns": [
+    {
+      "lambdaFunction": "myapp28b6625f7"
+    },
+    {
+      "lambdaFunction": "myapp28a03b28d"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-myapp2-dev-113953-authRole",
+    "unAuthRoleName": "amplify-myapp2-dev-113953-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "myapp28b6625f7",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    },
+    {
+      "category": "auth",
+      "resourceName": "myapp23ab574dc3ab574dc",
+      "attributes": [
+        "UserPoolId"
+      ]
+    },
+    {
+      "category": "auth",
+      "resourceName": "userPoolGroups",
+      "attributes": [
+        "adminGroupRole"
+      ]
+    },
+    {
+      "category": "auth",
+      "resourceName": "userPoolGroups",
+      "attributes": [
+        "userGroupRole"
+      ]
+    },
+    {
+      "category": "function",
+      "resourceName": "myapp28a03b28d",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

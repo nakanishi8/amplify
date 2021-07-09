@@ -1,0 +1,25 @@
+@startuml Cognito-update-account
+
+title AWS Cognito\nアカウント情報更新
+
+actor "管理、一般ユーザー(Browser)"
+
+"管理、一般ユーザー(Browser)" -> WebApp
+
+WebApp -> "API Gateway" : アカウント更新
+
+"API Gateway" -> "Cognito Identity Pool" : アカウント更新権限のチェック
+
+"API Gateway" -> Lambda
+
+Lambda -> "Cognito user pool" : アカウント更新(email等)
+
+Lambda -> RDS : レコード更新(アプリケーションの情報)
+
+note right : 一部の情報は管理ユーザーのみ更新可能
+
+Lambda -> "API Gateway"
+
+"API Gateway" -> WebApp
+
+@enduml

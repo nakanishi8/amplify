@@ -1,81 +1,94 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
 
 import Amplify, { API, Auth} from "aws-amplify";
 import awsExports from "./aws-exports";
-import { AmplifyAuthenticator, AmplifySignUp, AmplifySignIn, withAuthenticator } from '@aws-amplify/ui-react';
-// import { withAuthenticator } from '@aws-amplify/ui-react'
+import { AmplifyAuthenticator, AmplifySignUp, AmplifySignIn } from '@aws-amplify/ui-react';
+
 Amplify.configure(awsExports);
-
-// Auth.configure({
-//   // other configurations
-//   // ...
-//   authenticationFlowType: 'ADMIN_USER_PASSWORD_AUTH'
-// });
-
-const signUpConfig = {
-  hiddenDefaults: ['username'],
-  signUpFields: [
-    {
-      label: 'Email',
-      key: 'email', // !!!
-      required: true,
-      displayOrder: 1,
-      type: 'email',
-      custom: false
-    },
-    {
-      label: 'Password',
-      key: 'password',
-      required: true,
-      displayOrder: 2,
-      type: 'password',
-      custom: false
-    },
-    // {
-    //   label: 'Phone Number',
-    //   key: 'phone_number',
-    //   required: true,
-    //   displayOrder: 3,
-    //   type: 'tel',
-    //   custom: false
-    // }
-  ]
-};
-
-// Amplify.configure({
-//   Auth: {
-//     region: 'ap-northeast-1',
-//     userPoolId: 'ap-northeast-1_6R1QWY2bc',
-//     userPoolWebClientId: '4jmhhv2nt60fai8vuu4m6nluqq',
-//   },
-//   API: {
-//     endpoints: [
-//       {
-//         name: 'dev',
-//         endpoint:
-//           'https://4shhsintc8.execute-api.ap-northeast-1.amazonaws.com/dev',
-//       },
-//     ],
-//   },
-// });
 
 function App() {
 
-  const handleClick = async function () {
-    const user = await Auth.currentAuthenticatedUser();
-    const token = user.signInUserSession.idToken.jwtToken;
-    // const myInit = {
-    //   headers: {
-    //     Authorization: token,
-    //   },
-    // };
+  const [books, setBooks] = useState()
+  const [items, setItems] = useState()
 
-    const res = await API.get('apib750dada', '/items', {});
+  const handleBooksClick = async function () {
+    // const user = await Auth.currentAuthenticatedUser();
+    // const token = user.signInUserSession.idToken.jwtToken;
+    const res = await API.get('api19ff9801', '/books', {});
+    setBooks(res);
     console.log(res);
   };
+
+  const handleItemsClick = async function () {
+    // const user = await Auth.currentAuthenticatedUser();
+    // const token = user.signInUserSession.idToken.jwtToken;
+    const res = await API.get('api19ff9801', '/items', {});
+    setItems(res);
+    console.log(res);
+  };
+
+  const listUsers = async function () {
+    let apiName = 'AdminQueries';
+    let path = '/listUsers';
+    let myInit = { 
+        queryStringParameters: {
+          // "groupname": "Editors",
+          "limit": 0,
+          // "token": nextToken:string
+        },
+        headers: {
+          'Content-Type' : 'application/json',
+          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+        }
+    }
+    const { NextToken, ...rest } =  await API.get(apiName, path, myInit);
+    console.info(NextToken);
+    console.info(rest);
+    // nextToken = NextToken;
+    // return rest;
+  }
+
+  const disableUser = async function () {
+    let apiName = 'AdminQueries';
+    let path = '/disableUser';
+    let myInit = { 
+        headers: {
+          'Content-Type' : 'application/json',
+          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+        },
+        body: {
+          username: "61951d36-44af-459a-bab0-2de77bf6a583",
+        },        
+    }
+    const { NextToken, ...rest } =  await API.post(apiName, path, myInit);
+    console.info(NextToken);
+    console.info(rest);
+    // nextToken = NextToken;
+    // return rest;
+  }
+
+  const enableUser = async function () {
+    let apiName = 'AdminQueries';
+    let path = '/enableUser';
+    let myInit = { 
+        headers: {
+          'Content-Type' : 'application/json',
+          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+        },
+        body: {
+          username: "61951d36-44af-459a-bab0-2de77bf6a583",
+        },        
+    }
+    const { NextToken, ...rest } =  await API.post(apiName, path, myInit);
+    console.info(NextToken);
+    console.info(rest);
+    // nextToken = NextToken;
+    // return rest;
+  }
+
 
   return (
     <>
@@ -91,6 +104,12 @@ function App() {
             inputProps: { required: true, autocomplete: "email" },
           },
           {
+            type: "name",
+            label: "Custom Name Label",
+            placeholder: "Custom Name placeholder",
+            inputProps: { required: true, autocomplete: "username" },
+          },
+          {
             type: "password",
             label: "Custom Password Label",
             placeholder: "Custom password placeholder",
@@ -103,7 +122,14 @@ function App() {
 
     <div className="App">
       <header className="App-header">
-        <button onClick={handleClick}>Click me</button>
+        <button onClick={handleBooksClick}>Click Books api</button>
+        <div>{books}</div>
+        <button onClick={handleItemsClick}>Click Items api</button>
+        <div>{items}</div>
+        <button onClick={listUsers}>Click listUsers api</button>
+        <button onClick={disableUser}>Click disableUser api</button>
+        <button onClick={enableUser}>Click enableUser api</button>
+        {/* <div>{items}</div> */}
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
         <p>

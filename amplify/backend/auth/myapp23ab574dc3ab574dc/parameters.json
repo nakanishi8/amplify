@@ -1,14 +1,14 @@
 {
-    "identityPoolName": "myapp248a0c9a3_identitypool_48a0c9a3",
+    "identityPoolName": "myapp23ab574dc_identitypool_3ab574dc",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "myapp248a0c9a3",
-    "userPoolName": "myapp248a0c9a3_userpool_48a0c9a3",
+    "resourceNameTruncated": "myapp23ab574dc",
+    "userPoolName": "myapp23ab574dc_userpool_3ab574dc",
     "autoVerifiedAttributes": [
         "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "ON",
     "mfaTypes": [
-        "SMS Text Message"
+        "TOTP"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "myapp248a0c9a3_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
-    "sharedId": "48a0c9a3",
-    "resourceName": "myapp248a0c9a348a0c9a3",
+    "userpoolClientLambdaRole": "myapp23ab574dc_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": true,
+    "sharedId": "3ab574dc",
+    "resourceName": "myapp23ab574dc3ab574dc",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -50,17 +50,19 @@
     "usernameAttributes": [
         "email"
     ],
-    "userPoolGroups": false,
+    "userPoolGroups": true,
     "adminQueries": false,
     "triggers": "{}",
     "hostedUI": false,
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+        "admin",
+        "user"
+    ],
     "serviceName": "Cognito",
-    "usernameCaseSensitive": false,
     "parentStack": {
         "Ref": "AWS::StackId"
     },
-    "breakCircularDependency": true,
+    "breakCircularDependency": false,
     "permissions": [],
     "dependsOn": []
 }
